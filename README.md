@@ -18,8 +18,6 @@ expected to be available for the foreseeable future).
 First `bjodahimg16base` is built (with compilers):
 
 ```
-$ ./tools/03_download_base_python_packages.sh  # check for duplicates
-$ ./tools/04_upload_base_to_repo.sh latest
 $ ./tools/05_generate_base_Dockerfile.sh latest
 $ ./tools/10_build_base_image.sh latest dummy_reg_user
 ```

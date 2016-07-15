@@ -7,4 +7,4 @@
     libjpeg-dev libatlas-base-dev libzmq3-dev libxslt1-dev libxml2-dev \
     python-dev python3-dev python-all python-all-dev \
     python3-all python3-all-dev python-numpy python3-numpy python-setuptools \
-    python3-setuptools
+    python3-setuptools python-stdeb python3-stdeb

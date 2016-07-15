@@ -1,3 +1,0 @@
-    clang-3.7 libclang-common-3.7-dev libclang-3.7-dev libclang1-3.7 \
-    libllvm3.7 lldb-3.7 llvm-3.7 llvm-3.7-dev llvm-3.7-runtime \
-    clang-modernize-3.7 clang-format-3.7 python-clang-3.7 lldb-3.7-dev && \
