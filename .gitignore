@@ -5,6 +5,9 @@ deb-buildscripts/*.tar.bz2
 deb-buildscripts/*-build/
 pypi_download*/
 tests/output/*.*
+tests/test_python_packages.sh
 blobs_download/
 !blobs_download/.emptyfile
 tests-base/test_python_packages.sh
+_build/
+packages/

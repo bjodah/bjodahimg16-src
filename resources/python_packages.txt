@@ -1,4 +1,3 @@
-scipy
 future
 cython
 sympy

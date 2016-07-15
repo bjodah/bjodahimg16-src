@@ -1,14 +1,29 @@
-#!/bin/bash -ex
+#!/bin/bash -xe
+IMAGE=${1:-"bjodah/bjodahimg16base:v1.1"}
+ABS_REPO_PATH=$(unset CDPATH && cd "$(dirname "$0")/.." && echo $PWD)
+if [[ ! -d pypi_download ]]; then
+    mkdir pypi_download
+fi
+cp -a resources/python3_packages.txt pypi_download/
+cp -a resources/python_packages.txt pypi_download/
 
-python3.4 -m pip install --download pypi_download $(cat resources/python3_packages.txt | tr '\n' ' ')
-
+cat <<'EOF' >pypi_download/download.sh
+#!/bin/bash
+trap "chown -R $HOST_GID:$HOST_UID /pypi_download" EXIT SIGINT SIGTERM
+python3 -m pip download $(cat python3_packages.txt | tr '\n' ' ')
 tmpdir=$(mktemp -d)
-trap "rm -r $tmpdir" SIGINT SIGTERM EXIT
-virtualenv $tmpdir
-source $tmpdir/bin/activate
-python -m pip install --upgrade setuptools
-python -m pip install --download pypi_download $(cat resources/python_packages.txt | tr '\n' ' ')
+python -m pip download $(cat python_packages.txt | tr '\n' ' ')
+EOF
+chmod +x pypi_download/download.sh
 
+docker run --name bjodahimg16src-20 -e TERM -e HOST_UID=$(id -u) -e HOST_GID=$(id -g) -v $ABS_REPO_PATH/pypi_download:/pypi_download -w /pypi_download $IMAGE /pypi_download/download.sh | tee $(basename $0).log
+BUILD_EXIT=$(docker wait bjodahimg16src-20)
+docker rm bjodahimg16src-20
+
+if [[ "$BUILD_EXIT" != "0" ]]; then
+    echo "Build failed"
+    exit 1
+fi
 
 cat <<EOF>tests/test_python_packages.sh
 #!/bin/bash -e

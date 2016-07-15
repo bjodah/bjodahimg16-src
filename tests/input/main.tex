@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage{fixltx2e}[2006/09/13]
+\usepackage[T1]{fontenc}
+\usepackage{ifpdf,ifxetex}
+\ifxetex
+  \usepackage{fontspec}           % XeLaTeX specific
+  %\setmainfont{Linux Libertine O}  % LaTeX default (Computer Modern Unicode)
+\else
+  \usepackage[utf8]{inputenc}     % support utf8 (if possible: use xetex)
+  \usepackage{lmodern}
+  \usepackage{newunicodechar}
+  \ifpdf
+    \usepackage[pdftex]{graphicx}
+    \usepackage{epstopdf}
+    \epstopdfsetup{suffix=.\SourceExt}
+    \usepackage[pdftex,colorlinks,unicode=True]{hyperref}
+  \else
+    \usepackage{graphicx}
+    \usepackage[colorlinks,unicode=True]{hyperref}
+  \fi
+\fi
+\usepackage{xcolor}
+\usepackage{subfig}
+
+\usepackage[style=chem-acs,doi,autocite=superscript,pageranges=false,backend=biber]{biblatex}
+\AtEveryBibitem{\clearfield{month}} % Don't put "Jan. 2000" in references
+\AtEveryCitekey{\clearfield{month}} % http://tex.stackexchange.com/questions/55780
+\renewcommand{\cite}{\autocite}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{cleveref}
+
+
+\begin{document}
+\section{Introduction}
+\begin{itemize}
+\item stuff0
+\item stuff1
+\end{itemize}
+
+\section{Conclusion}
+Yup.
+
+\section{Acknowledgments}
+Thanks!
+
+\end{document}

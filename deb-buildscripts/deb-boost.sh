@@ -83,7 +83,7 @@ override_dh_auto_install:
 	./b2 --prefix=`pwd`/debian/boost-all/usr/ install
 	mv debian/boost-all/usr/include debian/boost-all-dev/usr
 	cp b2 debian/boost-build/usr/bin
-        ./b2 install --prefix=`pwd`/debian/boost-build/usr/ install
+	./b2 install --prefix=`pwd`/debian/boost-build/usr/ install
 EOF
 #Create some misc files
 echo "8" > debian/compat

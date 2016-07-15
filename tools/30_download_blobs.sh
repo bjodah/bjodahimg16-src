@@ -1,5 +1,7 @@
 #!/bin/bash -x
-mkdir -p blobs_download/
+if [[ ! -d blobs_download/ ]]; then
+    mkdir blobs_download/
+fi
 set +e
 cd blobs_download/
 while read LINE; do

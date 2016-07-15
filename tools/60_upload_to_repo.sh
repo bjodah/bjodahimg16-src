@@ -1,8 +1,12 @@
 #!/bin/bash -u
 TAG=${1}
+SERVER=$2
+ROOT='~/public_html/bjodahimg16'
+ssh $SERVER "mkdir -p $ROOT/$TAG/{dpkg,pypi,blobs}"
+
 for DPKG in $(cat ./resources/dpkg_packages.txt); do
-    rsync -aur ./packages/$DPKG repo@hera.physchem.kth.se:~/public_html/bjodahimg16/$TAG/dpkg/
+    rsync -aur ./packages/$DPKG $SERVER:$ROOT/$TAG/dpkg/
 done
 
-rsync -aur ./pypi_download/ repo@hera.physchem.kth.se:~/public_html/bjodahimg16/$TAG/pypi
-rsync -aur ./blobs_download/ repo@hera.physchem.kth.se:~/public_html/bjodahimg16/$TAG/blobs
+rsync -aur ./pypi_download/ $SERVER:$ROOT/$TAG/pypi
+rsync -aur ./blobs_download/ $SERVER:$ROOT/$TAG/blobs
