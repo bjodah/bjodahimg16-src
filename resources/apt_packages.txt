@@ -1,0 +1,14 @@
+    texlive-generic-recommended texlive-latex-recommended texlive-science texlive-fonts-recommended \
+    texlive-fonts-extra texlive-latex-extra  texlive-lang-swedish lmodern latex-xcolor texlive-bibtex-extra biber \
+    graphviz dot2tex dvipng \
+    freeglut3-dev libglfw3-dev \
+    expect-dev xutils-dev \
+    phantomjs imagemagick \
+    python-matplotlib python3-matplotlib \
+    python-mako python3-mako \
+    python-mpmath python3-mpmath \
+    python-scipy python3-scipy \
+    python-rdkit librdkit1 rdkit-data \ 
+    octave \
+    libxrender1 fonts-dejavu pandoc \
+    libgsl-dev libsundials-serial-dev coinor-libipopt-dev

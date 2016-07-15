@@ -1,0 +1,15 @@
+*.log
+deb-buildscripts/*.sh.cache
+deb-buildscripts/*.tar.gz
+deb-buildscripts/*.tar.bz2
+deb-buildscripts/*-build/
+_build/
+packages/
+pypi_download/
+*.egg-info
+dist/
+**.pyc
+tests/output/*.*
+blobs_download/
+!blobs_download/.emptyfile
+pypi_download_base/
