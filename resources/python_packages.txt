@@ -33,4 +33,3 @@ holoviews[recommended]
 ase
 virtualenv
 xarray
-astropy

@@ -1,1 +1,1 @@
-https://repo.continuum.io/miniconda/Miniconda3-4.0.5-Linux-x86_64.sh b1b15a3436bb7de1da3ccc6e08c7a5df miniconda3.sh 
+https://repo.continuum.io/miniconda/Miniconda2-4.1.11-Linux-x86_64.sh b2af3b9ff39c4a4a812f50cecbafcda6 miniconda3.sh 
