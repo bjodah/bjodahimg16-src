@@ -11,19 +11,8 @@ BLOB_FNAMES=$(cat ./resources-dev/blob_urls.txt | awk '{print $3}')
 for FNAME in $BLOB_FNAMES; do
     echo $FNAME
 done
-echo "DPKG_PKGS=$DPKG_PKGS"
-DPKG_MIRROR="http://hera.physchem.kth.se/~repo/bjodahimg16dev/$TAG/dpkg"
-PYPI_MIRROR="http://hera.physchem.kth.se/~repo/bjodahimg16dev/$TAG/pypi"
 BLOBS_MIRROR="http://hera.physchem.kth.se/~repo/bjodahimg16dev/$TAG/blobs"
 # The --force-overwrite below is for both python-cython and python3-cython: /usr/bin/cython
-read -r -d '' DPKG_DOWNLOAD_INSTALL <<EOF
-    cd /tmp && \\
-    for FNAME in $DPKG_PKGS; do \\
-        wget --no-verbose "$DPKG_MIRROR/\$FNAME"; \\
-    done && \\
-    dpkg -i --force-overwrite $DPKG_PKGS && \\
-    rm $DPKG_PKGS
-EOF
 read -r -d '' BLOBS_DOWNLOAD_INSTALL <<EOF
     cd /tmp && \\
     for FNAME in $BLOB_FNAMES; do \\
@@ -39,11 +28,11 @@ read -r -d '' CLEAN <<EOF
 EOF
 
 
-cat <<EOF >bjodahimg16-dockerfile/environment/Dockerfile
+cat <<EOF >bjodahimg16dev-dockerfile/environment/Dockerfile
 # DO NOT EDIT, This Dockerfile is generated from ./tools/90_generate_dev_Dockerfile.sh
-FROM bjodah/bjodahimg16:v1.0
+FROM bjodah/bjodahimg16:v1.1
 MAINTAINER Björn Dahlgren <bjodah@DELETEMEgmail.com>
-ENV PATH /opt/miniconda3/bin:$PATH
+ENV PATH /opt/miniconda3/bin:\$PATH
 RUN \\
     ${BLOBS_DOWNLOAD_INSTALL} && \\
     conda install conda-build gmp numpy cython cmake patchelf && \\

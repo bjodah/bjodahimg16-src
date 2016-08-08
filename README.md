@@ -68,7 +68,7 @@ for e.g. CI-servers but not as long-term reproducibility dependency.
 $ ssh repo@hera.physchem.kth.se 'rm public_html/bjodahimg16/latest'
 $ ./tools/70_generate_Dockerfile.sh vX.Y
 $ ./tools/80_build_image.sh vX.Y dummy_reg_user
-$ ssh repo@hera.physchem.kth.se 'mkdir public_html/bjodahimg/vX.YY; ln -s vX.YY public_html/latest'
+$ ssh repo@hera.physchem.kth.se 'mkdir public_html/bjodahimg/vX.Z; ln -s vX.Z public_html/latest'
 $ cd bjodahimg16-dockerfile
 $ git commit -am "various updates for release vX.Y"
 $ git tag -a vX.Y -m vX.Y
