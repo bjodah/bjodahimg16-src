@@ -1,13 +1,12 @@
     texlive-generic-recommended texlive-latex-recommended texlive-science texlive-fonts-recommended \
-    texlive-fonts-extra texlive-latex-extra  texlive-lang-european lmodern latex-xcolor texlive-bibtex-extra biber \
+    texlive-fonts-extra texlive-latex-extra  texlive-lang-european lmodern texlive-bibtex-extra biber \
     graphviz dot2tex dvipng \
     freeglut3-dev libglfw3-dev \
-    expect-dev xutils-dev \
+    expect xutils-dev \
     phantomjs emscripten imagemagick \
-    cython \
+    cython cython3 \
     python-wheel python3-wheel \
     python-matplotlib python3-matplotlib \
-    python-mako python3-mako \
     python-mpmath python3-mpmath \
     python-scipy python3-scipy \
     python-pandas python3-pandas \

@@ -1,5 +1,4 @@
 #!/bin/bash -ex
-which coveralls
 which phantomjs
 
 # Test py.test:

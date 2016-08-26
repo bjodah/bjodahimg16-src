@@ -36,5 +36,9 @@ for pypkg in $(cat resources/python_packages.txt); do
     if [[ $pypkg == *[* ]]; then
         continue
     fi
+    if [[ $pypkg == *==* ]]; then
+        continue
+    fi
     echo "python -c \"import $pypkg\"">>tests/test_python_packages.sh
+    chmod +x tests/test_python_packages.sh
 done

@@ -1,5 +1,6 @@
+cclib==1.4.1
 future
-cython
+mako
 sympy
 pytest
 pytest-pep8
@@ -9,7 +10,6 @@ sphinx
 periodictable
 pycompilation
 pycodeexport
-coveralls
 numpydoc
 jupyter
 argh
@@ -21,9 +21,7 @@ bokeh
 mogli
 pylatex
 joblib
-cclib
 toolz
-grip
 statsmodels
 mpld3
 pip
