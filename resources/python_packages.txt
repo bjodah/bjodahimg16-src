@@ -7,6 +7,7 @@ pytest-pep8
 pytest-cov
 pytest-flakes
 sphinx
+sphinx_rtd_theme
 periodictable
 pycompilation
 pycodeexport
