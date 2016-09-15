@@ -53,11 +53,11 @@ to you trusting me).
 Finally I have a volatile image (```bjodahimg16dev```) which is built
 from the main image: 
 ```
-$ ./91_download_blobs-dev.sh
-$ ./93_upload_to_repo-dev.sh latest repo@hera
-$ ./94_generate_dev_Dockerfile.sh latest
-$ ./95_build_dev_image.sh latest dummy_reg_user
-$ ./96_test_dev_image.sh latest dummy_reg_user
+$ ./tools/91_download_blobs-dev.sh
+$ ./tools/93_upload_to_repo-dev.sh latest repo@hera
+$ ./tools/94_generate_dev_Dockerfile.sh latest
+$ ./tools/95_build_dev_image.sh latest dummy_reg_user
+$ ./tools/96_test_dev_image.sh latest dummy_reg_user
 ```
 
 With volatile I mean that it is a moving target, still useful

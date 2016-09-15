@@ -30,23 +30,28 @@ EOF
 
 cat <<EOF >bjodahimg16dev-dockerfile/environment/Dockerfile
 # DO NOT EDIT, This Dockerfile is generated from ./tools/90_generate_dev_Dockerfile.sh
-FROM bjodah/bjodahimg16:v1.1
+FROM bjodah/bjodahimg16:v1.2
 MAINTAINER Björn Dahlgren <bjodah@DELETEMEgmail.com>
 ENV PATH /opt/miniconda3/bin:\$PATH
 RUN \\
+    apt-get update && apt-get --quiet --assume-yes install sudo && \\
     ${BLOBS_DOWNLOAD_INSTALL} && \\
-    conda install conda-build gmp numpy cython cmake patchelf && \\
     conda config --set always_yes yes && \\
     conda config --set changeps1 no && \\
+    conda config --set show_channel_urls True && \\
+    conda config --add channels conda-forge && \\
+    conda install conda-build python=3.5 gmp numpy scipy matplotlib cython cmake gsl numba pytest ipywidgets && \\
+    python2 -m pip install git+https://github.com/bjodah/cyipopt.git && \\
+    python3 -m pip install git+https://github.com/bjodah/cyipopt.git && \\
     conda clean -t && \\
-    wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | apt-key add - && \\
-    echo "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.8 main" | tee -a /etc/apt/sources.list && \\
-    apt-get update && apt-get --quiet --assume-yes --no-install-recommends install ${APT_PACKAGES} && \\
     ${CLEAN}
-RUN \\
-    python2 -m pip install git+https://github.com/bjodah/cyipopt.git && \
-    python3 -m pip install git+https://github.com/bjodah/cyipopt.git
 EOF
+
+
+    # wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | apt-key add - && \\
+    # echo "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.8 main" | tee -a /etc/apt/sources.list && \\
+    # apt-get update && apt-get --quiet --assume-yes --no-install-recommends install ${APT_PACKAGES} && \\
+
 
 # the last RUN statement contain various fixes...
 
