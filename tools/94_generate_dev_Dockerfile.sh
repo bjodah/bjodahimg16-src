@@ -40,7 +40,7 @@ RUN \\
     conda config --set changeps1 no && \\
     conda config --set show_channel_urls True && \\
     conda config --add channels conda-forge && \\
-    conda install conda-build python=3.5 gmp numpy scipy matplotlib cython cmake gsl numba pytest ipywidgets mpmath && \\
+    conda install conda-build python=3.5 gmp numpy scipy matplotlib cython cmake gsl numba pytest ipywidgets mpmath xz tk mpfr openssl sundials sympy pip sqlite && \\
     python2 -m pip install git+https://github.com/bjodah/cyipopt.git && \\
     python3 -m pip install git+https://github.com/bjodah/cyipopt.git && \\
     conda clean -t && \\
