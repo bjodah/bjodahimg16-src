@@ -32,7 +32,6 @@ cat <<EOF >bjodahimg16dev-dockerfile/environment/Dockerfile
 # DO NOT EDIT, This Dockerfile is generated from ./tools/90_generate_dev_Dockerfile.sh
 FROM bjodah/bjodahimg16:v1.2
 MAINTAINER Björn Dahlgren <bjodah@DELETEMEgmail.com>
-ENV PATH /opt/miniconda3/bin:\$PATH
 RUN \\
     apt-get update && apt-get --quiet --assume-yes install sudo && \\
     ${BLOBS_DOWNLOAD_INSTALL} && \\
