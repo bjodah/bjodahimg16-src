@@ -33,16 +33,16 @@ cat <<EOF >bjodahimg16dev-dockerfile/environment/Dockerfile
 FROM bjodah/bjodahimg16:v1.2
 MAINTAINER Björn Dahlgren <bjodah@DELETEMEgmail.com>
 RUN \\
-    apt-get update && apt-get --quiet --assume-yes install sudo && \\
-    ${BLOBS_DOWNLOAD_INSTALL} && \\
-    conda config --set always_yes yes && \\
-    conda config --set changeps1 no && \\
-    conda config --set show_channel_urls True && \\
-    conda config --add channels conda-forge && \\
-    conda install conda-build python=3.5 gmp numpy scipy matplotlib cython cmake gsl numba pytest ipywidgets mpmath xz tk mpfr openssl sundials sympy pip sqlite && \\
     python2 -m pip install git+https://github.com/bjodah/cyipopt.git && \\
     python3 -m pip install git+https://github.com/bjodah/cyipopt.git && \\
-    conda clean -t && \\
+    apt-get update && apt-get --quiet --assume-yes install sudo && \\
+    ${BLOBS_DOWNLOAD_INSTALL} && \\
+    PATH=/opt/miniconda3/bin:$PATH conda config --set always_yes yes && \\
+    PATH=/opt/miniconda3/bin:$PATH conda config --set changeps1 no && \\
+    PATH=/opt/miniconda3/bin:$PATH conda config --set show_channel_urls True && \\
+    PATH=/opt/miniconda3/bin:$PATH conda config --add channels conda-forge && \\
+    PATH=/opt/miniconda3/bin:$PATH conda install conda-build python=3.5 gmp numpy scipy matplotlib cython cmake gsl numba pytest ipywidgets mpmath xz tk mpfr openssl sundials sympy pip sqlite && \\
+    PATH=/opt/miniconda3/bin:$PATH conda clean -t && \\
     ${CLEAN}
 EOF
 
