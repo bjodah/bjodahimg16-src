@@ -33,16 +33,18 @@ cat <<EOF >bjodahimg16dev-dockerfile/environment/Dockerfile
 FROM bjodah/bjodahimg16:v1.2
 MAINTAINER Björn Dahlgren <bjodah@DELETEMEgmail.com>
 RUN \\
+    python2 -m pip install --upgrade pip && \\
+    python3 -m pip install --upgrade pip && \\
     python2 -m pip install git+https://github.com/bjodah/cyipopt.git && \\
     python3 -m pip install git+https://github.com/bjodah/cyipopt.git && \\
-    apt-get update && apt-get --quiet --assume-yes install sudo && \\
+    apt-get update && apt-get --quiet --assume-yes --no-install-recommends install sudo latexmk texlive-math-extra && \\
     ${BLOBS_DOWNLOAD_INSTALL} && \\
-    PATH=/opt/miniconda3/bin:$PATH conda config --set always_yes yes && \\
-    PATH=/opt/miniconda3/bin:$PATH conda config --set changeps1 no && \\
-    PATH=/opt/miniconda3/bin:$PATH conda config --set show_channel_urls True && \\
-    PATH=/opt/miniconda3/bin:$PATH conda config --add channels conda-forge && \\
-    PATH=/opt/miniconda3/bin:$PATH conda install conda-build python=3.5 gmp numpy scipy matplotlib cython cmake gsl numba pytest ipywidgets mpmath xz tk mpfr openssl sundials sympy pip sqlite && \\
-    PATH=/opt/miniconda3/bin:$PATH conda clean -t && \\
+    PATH=/opt/miniconda3/bin:\$PATH conda config --set always_yes yes && \\
+    PATH=/opt/miniconda3/bin:\$PATH conda config --set changeps1 no && \\
+    PATH=/opt/miniconda3/bin:\$PATH conda config --set show_channel_urls True && \\
+    PATH=/opt/miniconda3/bin:\$PATH conda config --add channels conda-forge && \\
+    PATH=/opt/miniconda3/bin:\$PATH conda install conda-build python=3.5 gmp numpy scipy matplotlib cython cmake gsl numba pytest ipywidgets mpmath xz tk mpfr openssl sundials sympy pip sqlite && \\
+    PATH=/opt/miniconda3/bin:\$PATH conda clean -t && \\
     ${CLEAN}
 EOF
 
