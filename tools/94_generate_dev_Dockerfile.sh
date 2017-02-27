@@ -33,11 +33,15 @@ cat <<EOF >bjodahimg16dev-dockerfile/environment/Dockerfile
 FROM bjodah/bjodahimg16:v1.2
 MAINTAINER Björn Dahlgren <bjodah@DELETEMEgmail.com>
 RUN \\
+    apt-get update && apt-get --quiet --assume-yes --no-install-recommends install sudo latexmk texlive-math-extra && \\
+    cd /opt && curl -LOs http://downloads.sourceforge.net/project/boost/boost/1.63.0/boost_1_63_0.tar.bz2 && \\
+    echo "1c837ecd990bb022d07e7aab32b09847  boost_1_63_0.tar.bz2" | md5sum -c -- && \\
+    tar xjf boost_1_63_0.tar.bz2 && rm boost_1_63_0.tar.bz2 && \\
+    cd /opt/boost_1_63_0 && ./bootstrap.sh && ./b2 -j 2 --prefix=/opt/boost_1_63_0 install && \\
+    ${CLEAN}
+RUN \\
     python2 -m pip install --upgrade pip && \\
     python3 -m pip install --upgrade pip && \\
-    python2 -m pip install git+https://github.com/bjodah/cyipopt.git && \\
-    python3 -m pip install git+https://github.com/bjodah/cyipopt.git && \\
-    apt-get update && apt-get --quiet --assume-yes --no-install-recommends install sudo latexmk texlive-math-extra && \\
     ${BLOBS_DOWNLOAD_INSTALL} && \\
     PATH=/opt/miniconda3/bin:\$PATH conda config --set always_yes yes && \\
     PATH=/opt/miniconda3/bin:\$PATH conda config --set changeps1 no && \\
@@ -46,12 +50,6 @@ RUN \\
     PATH=/opt/miniconda3/bin:\$PATH conda install conda-build python=3.5 gmp numpy scipy matplotlib cython cmake gsl numba pytest ipywidgets mpmath xz tk mpfr openssl sundials sympy pip sqlite && \\
     PATH=/opt/miniconda3/bin:\$PATH conda clean -t && \\
     ${CLEAN}
-RUN \\
-    cd /opt && curl -LOs http://downloads.sourceforge.net/project/boost/boost/1.63.0/boost_1_63_0.tar.bz2 && \\
-    echo "1c837ecd990bb022d07e7aab32b09847  boost_1_63_0.tar.bz2" | md5sum -c -- && \\
-    tar xjf boost_1_63_0.tar.bz2 && rm boost_1_63_0.tar.bz2
-RUN \\
-    cd /opt/boost_1_63_0 && ./bootstrap.sh && ./b2 -j 2 --prefix=/opt/boost_1_63_0 install
 EOF
 
 
