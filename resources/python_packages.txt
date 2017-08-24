@@ -1,6 +1,7 @@
 cclib==1.4.1
 future
 mako
+mpmath
 sympy
 pytest
 pytest-pep8
@@ -11,8 +12,14 @@ sphinx_rtd_theme
 periodictable
 pycompilation
 pycodeexport
+numpy
 numpydoc
+scipy
+matplotlib
+pandas
 jupyter
+ipykernel
+cython
 argh
 quantities
 fastcache
@@ -28,7 +35,8 @@ mpld3
 pip
 stdeb
 param
-holoviews[recommended]
 ase
 virtualenv
 xarray
+setuptools
+wheel

@@ -1,18 +1,20 @@
 #!/bin/bash -xe
-IMAGE=${1:-"bjodah/bjodahimg16base:v1.1"}
+IMAGE=${1:-"bjodah/bjodahimg16base:v1.2"}
 ABS_REPO_PATH=$(unset CDPATH && cd "$(dirname "$0")/.." && echo $PWD)
 if [[ ! -d pypi_download ]]; then
     mkdir pypi_download
 fi
-cp -a resources/python3_packages.txt pypi_download/
 cp -a resources/python_packages.txt pypi_download/
+cp -a resources/python2_packages.txt pypi_download/
+cp -a resources/python3_packages.txt pypi_download/
 
 cat <<'EOF' >pypi_download/download.sh
 #!/bin/bash
 trap "chown -R $HOST_GID:$HOST_UID /pypi_download" EXIT SIGINT SIGTERM
+python2 -m pip download $(cat python_packages.txt | tr '\n' ' ')
+python3 -m pip download $(cat python_packages.txt | tr '\n' ' ')
 python3 -m pip download $(cat python3_packages.txt | tr '\n' ' ')
-tmpdir=$(mktemp -d)
-python -m pip download $(cat python_packages.txt | tr '\n' ' ')
+python2 -m pip download $(cat python2_packages.txt | tr '\n' ' ')
 EOF
 chmod +x pypi_download/download.sh
 

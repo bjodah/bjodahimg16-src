@@ -1,2 +1,4 @@
 CherryPy
 Nikola[extras]
+holoviews[recommended]
+ipython

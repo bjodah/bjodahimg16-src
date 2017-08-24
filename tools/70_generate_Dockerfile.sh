@@ -9,10 +9,6 @@ cd "$ABS_REPO_PATH"
 APT_PACKAGES=$(cat ./resources/apt_packages.txt)
 DPKG_PKGS=$(cat ./resources/dpkg_packages.txt | head -c -1)
 BLOB_FNAMES=$(cat ./resources/blob_urls.txt | awk '{print $3}')
-for FNAME in $BLOB_FNAMES; do
-    echo $FNAME
-done
-echo "DPKG_PKGS=$DPKG_PKGS"
 DPKG_MIRROR="http://hera.physchem.kth.se/~repo/bjodahimg16/$TAG/dpkg"
 PYPI_MIRROR="http://hera.physchem.kth.se/~repo/bjodahimg16/$TAG/pypi"
 BLOBS_MIRROR="http://hera.physchem.kth.se/~repo/bjodahimg16/$TAG/blobs"
@@ -30,31 +26,32 @@ read -r -d '' BLOBS_DOWNLOAD_INSTALL <<EOF
     for FNAME in $BLOB_FNAMES; do \\
         wget --no-verbose "$BLOBS_MIRROR/\$FNAME"; \\
     done && \\
+    tar xjf phantomjs.tar.bz2 -C /usr/local/share/ && \\
+    ln -s /usr/local/share/phantomjs-*-linux-x86_64/bin/phantomjs /usr/local/bin/ && \\
     rm $BLOB_FNAMES
 EOF
 read -r -d '' PYPKGS_DOWNLOAD <<EOF
     cd /tmp && \\
-    for FNAME in $(cd pypi_download; ls * | grep -v "scipy-" | grep -v "pandas-" | grep -v -i "cython-" | tr '\n' ' '); do \\
+    for FNAME in $(cd pypi_download; ls * | tr '\n' ' '); do \\
         wget --quiet $PYPI_MIRROR/\$FNAME -O /tmp/\$FNAME; \\
     done
 EOF
 
 
 read -r -d '' PYPKGS_INSTALL <<EOF
-    for PYPKG in $(cat ./resources/python_packages.txt | grep "setuptools" | tr '\n' ' '); do \\
-        python2 -m pip install --upgrade --no-index --find-links file:///tmp/ \$PYPKG; \\
-        python3 -m pip install --upgrade --no-index --find-links file:///tmp/ \$PYPKG; \\
-    done && \\
-    for PYPKG in $(cat ./resources/python_packages.txt | grep -v "scipy" | grep -v "pandas" | grep -v -i "cython" | tr '\n' ' '); do \\
+    for PYPKG in $(cat ./resources/python_packages.txt | tr '\n' ' '); do \\
         python2 -m pip install --no-index --find-links file:///tmp/ \$PYPKG; \\
         python3 -m pip install --no-index --find-links file:///tmp/ \$PYPKG; \\
     done && \\
-    for PYPKG in $(cat ./resources/python3_packages.txt | grep -v "scipy" | grep -v "pandas" | grep -v -i "cython" | tr '\n' ' '); do \\
+    for PYPKG in $(cat ./resources/python3_packages.txt | tr '\n' ' '); do \\
         python3 -m pip install --no-index --find-links file:///tmp/ \$PYPKG; \\
     done && \\
+    for PYPKG in $(cat ./resources/python2_packages.txt | tr '\n' ' '); do \\
+        python2 -m pip install --no-index --find-links file:///tmp/ \$PYPKG; \\
+    done && \\
     ln -s /usr/local/share/pyphen /usr/share/pyphen && \\
-    python -m IPython kernel install && \\
-    python3 -m IPython kernel install
+    python2 -m ipykernel install && \\
+    python3 -m ipykernel install
 EOF
 # https://github.com/Kozea/Pyphen/issues/10
 
@@ -65,13 +62,14 @@ EOF
 read -r -d '' MATPLOTLIB <<EOF
     mkdir -p /root/.config/matplotlib/ && \\
     echo "backend: Agg" > /root/.config/matplotlib/matplotlibrc && \\
-    sed -i 's/TkAgg/Agg/g' /etc/matplotlibrc
+    python2 -c "import matplotlib.pyplot as plt" && \\
+    python3 -c "import matplotlib.pyplot as plt"
 EOF
 
 
 cat <<EOF >bjodahimg16-dockerfile/environment/Dockerfile
-# DO NOT EDIT, This Dockerfile is generated from ./tools/10_generate_Dockerfile.sh
-FROM bjodah/bjodahimg16base:v1.1
+# DO NOT EDIT, This Dockerfile is generated from $0
+FROM bjodah/bjodahimg16base:v1.2
 MAINTAINER Björn Dahlgren <bjodah@DELETEMEgmail.com>
 RUN \\
     apt-get update && apt-get --quiet --assume-yes --no-install-recommends install ${APT_PACKAGES} && \\
@@ -81,6 +79,9 @@ RUN \\
     ${PYPKGS_INSTALL} && \\
     ${MATPLOTLIB} && \\
     ${CLEAN}
+RUN \\
+    ${BLOBS_DOWNLOAD_INSTALL} && \\
+    ${CLEAN}
 EOF
-    # ${BLOBS_DOWNLOAD_INSTALL} && \\
+
     # ${DPKG_DOWNLOAD_INSTALL} && \\

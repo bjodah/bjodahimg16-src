@@ -1,18 +1,10 @@
     texlive-generic-recommended texlive-latex-recommended texlive-science texlive-fonts-recommended \
-    texlive-fonts-extra texlive-latex-extra  texlive-lang-european lmodern texlive-bibtex-extra biber \
-    graphviz dot2tex dvipng \
+    texlive-fonts-extra texlive-latex-extra texlive-lang-european lmodern texlive-bibtex-extra texlive-math-extra biber \
+    graphviz dot2tex dvipng latexmk sudo \
     freeglut3-dev libglfw3-dev \
-    expect xutils-dev \
-    phantomjs emscripten imagemagick \
-    cython cython3 \
-    python-wheel python3-wheel \
-    python-matplotlib python3-matplotlib \
-    python-mpmath python3-mpmath \
-    python-scipy python3-scipy \
-    python-pandas python3-pandas \
-    python-astropy python3-astropy \
+    expect xutils-dev cmake \
+    libfontconfig1 imagemagick \
     python-rdkit librdkit1 rdkit-data \ 
-    octave \
     libxrender1 fonts-dejavu pandoc \
     libgsl-dev libsundials-serial-dev coinor-libipopt-dev \
     libboost-all-dev libboost1.58-tools-dev

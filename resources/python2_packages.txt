@@ -1,0 +1,2 @@
+dot2tex
+ipython==5

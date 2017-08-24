@@ -19,7 +19,10 @@ First `bjodahimg16base` is built (which contains tools, compilers and
 some libraries):
 
 ```
-$ ./tools/05_generate_base_Dockerfile.sh
+$ ./tools/03_download_blobs_base.sh latest
+$ ./tools/04_upload_to_repo_base.sh latest repo@hera
+$ ./tools/05_generate_base_Dockerfile.sh latest
+$ sudo docker pull ubuntu:xenial
 $ ./tools/10_build_base_image.sh latest dummy_reg_user
 ```
 

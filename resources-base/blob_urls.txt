@@ -1,0 +1,1 @@
+https://bootstrap.pypa.io/get-pip.py 3b74f5cd0740a05802a23b019ce579a3 get-pip.py

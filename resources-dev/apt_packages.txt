@@ -1,1 +1,2 @@
-    clang-3.8 libllvm3.8 lldb-3.8 llvm-3.8 llvm-3.8-dev llvm-3.8-runtime clang-format-3.8 python-clang-3.8
+    valgrind doxygen scons xorg-dev libgl1-mesa-dev libsdl2-dev libsdl2-ttf-dev libsdl2-net-dev libsdl2-mixer-dev libsdl2-image-dev libsdl2-gfx-dev \
+    clang-5.0 libllvm5.0 lldb-5.0 llvm-5.0 llvm-5.0-dev llvm-5.0-runtime clang-format-5.0 python-clang-5.0
