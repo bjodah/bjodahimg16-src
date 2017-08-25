@@ -8,7 +8,7 @@ cd "$ABS_REPO_PATH"
 
 APT_PACKAGES=$(cat ./resources/apt_packages.txt)
 DPKG_PKGS=$(cat ./resources/dpkg_packages.txt | head -c -1)
-BLOB_FNAMES=$(cat ./resources/blob_urls.txt | awk '{print $3}')
+BLOB_FNAMES=$(cat ./resources/blob_urls.txt | awk '{print $3}' | tr '\r\n' ' ')
 DPKG_MIRROR="http://hera.physchem.kth.se/~repo/bjodahimg16/$TAG/dpkg"
 PYPI_MIRROR="http://hera.physchem.kth.se/~repo/bjodahimg16/$TAG/pypi"
 BLOBS_MIRROR="http://hera.physchem.kth.se/~repo/bjodahimg16/$TAG/blobs"

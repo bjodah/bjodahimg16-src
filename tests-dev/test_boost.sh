@@ -1,6 +1,6 @@
 #!/bin/bash
-if [[ ! -d /opt/boost_1_63_0 ]]; then
-    >&2 echo "Could not find directory: boost_1_63_0 under /opt:"
+if [[ ! -d /opt/boost_1_65_0 ]]; then
+    >&2 echo "Could not find directory: boost_1_65_0 under /opt:"
     set -x
     ls -lah /opt
     set +x
@@ -47,10 +47,10 @@ int main(int ac, char* av[]) {
     }
 }
 EOF
-CPLUS_INCLUDE_PATH=/opt/boost_1_63_0 LIBRARY_PATH=/opt/boost_1_63_0/lib g++ $TMPFILE -o test_po -lboost_program_options
-LD_LIBRARY_PATH=/opt/boost_1_63_0/lib ./test_po --help
+CPLUS_INCLUDE_PATH=/opt/boost_1_65_0 LIBRARY_PATH=/opt/boost_1_65_0/stage/lib g++ $TMPFILE -o test_po -lboost_program_options
+LD_LIBRARY_PATH=/opt/boost_1_65_0/stage/lib ./test_po --help
 if [[ $? -ne 64 ]]; then  # EX_USAGE == 64 on linux...
-    >&2 echo "Failed to run test_po (boost 1.63.0 link mismatch?)"
+    >&2 echo "Failed to run test_po (boost 1.65.0 link mismatch?)"
     exit 1
 fi
 cleanup

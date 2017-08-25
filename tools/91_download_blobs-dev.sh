@@ -9,6 +9,8 @@ while read LINE; do
     URL=${ARRAY[0]}
     MD5=${ARRAY[1]}
     FNAME=${ARRAY[2]}
-    wget --quiet $URL -O $FNAME
+    if ! echo $MD5 $FNAME | md5sum -c --; then
+        wget --quiet $URL -O $FNAME
+    fi
     echo $MD5 $FNAME | md5sum -c --
 done <../resources-dev/blob_urls.txt

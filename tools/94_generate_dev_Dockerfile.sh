@@ -7,7 +7,7 @@ ABS_REPO_PATH=$(unset CDPATH && cd "$(dirname "$0")/.." && echo $PWD)
 cd "$ABS_REPO_PATH"
 
 APT_PACKAGES=$(cat ./resources-dev/apt_packages.txt)
-BLOB_FNAMES=$(cat ./resources-dev/blob_urls.txt | awk '{print $3}')
+BLOB_FNAMES=$(cat ./resources-dev/blob_urls.txt | awk '{print $3}' | tr '\r\n' ' ')
 for FNAME in $BLOB_FNAMES; do
     echo $FNAME
 done
@@ -19,7 +19,7 @@ read -r -d '' BLOBS_DOWNLOAD_INSTALL <<EOF
         curl -LOs "$BLOBS_MIRROR/\$FNAME"; \\
     done && \\
     bash miniconda3.sh -b -p /opt/miniconda3 && \\
-    tar xjf boost_\*.tar.bz2 -C /opt && cd /opt/boost\*/ && ./bootstrap.sh && ./b2 -j 2 --prefix=\$PWD && \\
+    tar xjf boost_*.tar.bz2 -C /opt && cd /opt/boost*/ && ./bootstrap.sh && ./b2 -j 2 --prefix=\$PWD && cd - && \\
     rm $BLOB_FNAMES
 EOF
 
