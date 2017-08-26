@@ -19,7 +19,7 @@ read -r -d '' BLOBS_DOWNLOAD_INSTALL <<EOF
         curl -LOs "$BLOBS_MIRROR/\$FNAME"; \\
     done && \\
     bash miniconda3.sh -b -p /opt/miniconda3 && \\
-    tar xjf boost_*.tar.bz2 -C /opt && cd /opt/boost*/ && ./bootstrap.sh && ./b2 -j 2 --prefix=\$PWD && cd - && \\
+    tar xjf boost_*.tar.bz2 && cd boost* && ./bootstrap.sh && ./b2 -j 2 --prefix=/opt/\$(basename \$PWD) install && cd - && \\
     rm $BLOB_FNAMES
 EOF
 
