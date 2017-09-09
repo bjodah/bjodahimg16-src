@@ -1,4 +1,4 @@
-cclib==1.4.1
+cclib
 future
 mako
 mpmath
@@ -40,3 +40,4 @@ virtualenv
 xarray
 setuptools
 wheel
+scikit-optimize
