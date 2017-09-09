@@ -7,4 +7,5 @@
     python-rdkit librdkit1 rdkit-data \ 
     libxrender1 fonts-dejavu pandoc \
     libgsl-dev libsundials-serial-dev coinor-libipopt-dev \
-    libboost-all-dev libboost1.58-tools-dev
+    libboost-all-dev libboost1.58-tools-dev \
+    ffmpeg
