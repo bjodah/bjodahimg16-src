@@ -1,22 +1,20 @@
 cclib
 future
 mako
-mpmath
 sympy
 pytest
 pytest-pep8
 pytest-cov
 pytest-flakes
+pytest-flake8
+pytest-xdist
 sphinx
 sphinx_rtd_theme
 periodictable
-pycompilation
-pycodeexport
 numpy
 numpydoc
 scipy
 matplotlib
-pandas
 jupyter
 ipykernel
 cython
@@ -33,7 +31,6 @@ toolz
 statsmodels
 mpld3
 pip
-stdeb
 param
 ase
 virtualenv
@@ -41,3 +38,4 @@ xarray
 setuptools
 wheel
 scikit-optimize
+rstcheck
