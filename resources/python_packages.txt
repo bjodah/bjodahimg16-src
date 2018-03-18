@@ -45,3 +45,4 @@ appdirs
 tqdm
 pyparsing
 ipywidgets
+cvxpy
